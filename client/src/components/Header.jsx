@@ -13,7 +13,7 @@ const Header = () => {
 
                 <form className="bg-slate-100 p-3 rounded-lg flex items-center">
                     <input type="text" placeholder="Search..." className="bg-transparent outline-none w-28 sm:w-64" />
-                    <FaSearch className='text-slate-600' />
+                    <FaSearch className='text-slate-600 cursor-pointer' />
                 </form>
                 <ul className='flex gap-4'>
                     <Link to="/">
