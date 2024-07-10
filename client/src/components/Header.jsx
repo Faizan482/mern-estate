@@ -24,6 +24,10 @@ const Header = () => {
                         <li className='hidden sm:inline font-semibold text-slate-600 hover:text-slate-800'>About</li>
 
                     </Link>
+                    <Link to="/sign-up">
+                        <li className=' text-slate-600 font-semibold  hover:text-slate-800'>Sign Up</li>
+
+                    </Link>
                     <Link to="/sign-in">
                         <li className=' text-slate-600 font-semibold  hover:text-slate-800'>Sign In</li>
 
