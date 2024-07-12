@@ -1,11 +1,12 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-
+import { useDispatch, useSelector } from "react-redux"
+import { signinStart, signinFailour, signinSuccess } from "../redux/user/userSlice"
 const Signin = () => {
     const [formData, setFormData] = useState({})
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(false)
+    const { loading, error } = useSelector((state) => state.user)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value })
     }
@@ -14,7 +15,7 @@ const Signin = () => {
         e.preventDefault();
         try {
 
-            setLoading(true)
+            dispatch(signinStart())
             // take response 
             const res = await fetch("/api/auth/signin", {
                 method: 'POST',
@@ -26,18 +27,15 @@ const Signin = () => {
             const data = await res.json()
 
             if (data.success == false) {
-                setLoading(false);
-                setError(data.message);
+                dispatch(signinFailour(data.message))
                 return
             }
-            setLoading(false)
-            setError(null)
+            dispatch(signinSuccess(data))
             navigate('/home')
             console.log(data, "data is here")
             alert('User created successfully!');
         } catch (error) {
-            setLoading(false)
-            setError(error.message)
+            dispatch(signinFailour(error.message))
             alert(error.message)
         }
     }
